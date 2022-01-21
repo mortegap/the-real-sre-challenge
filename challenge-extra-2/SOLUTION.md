@@ -152,4 +152,4 @@ Commercial support is available at
 </html>
 ```
 
-![image](https://github.com/mortegap/the-real-sre-challenge/tree/main/challenge-extra-2/challenge-extra-2-port-forwarding.png?raw=true)
+![image](challenge-extra-2-port-forwarding.png)

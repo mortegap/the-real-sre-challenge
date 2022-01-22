@@ -1,6 +1,6 @@
 # Extra Challenge 2 Kubernetes
 
-Installed minikube as a cluster
+Installed minikube as a cluster (I have it already installed)
 Using kubectl as an interface for k8s cluster
 
 Command for applying manifest:

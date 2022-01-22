@@ -4,7 +4,7 @@ import http.server
 import logging
 import socketserver
 
-PORT = 8080
+PORT = 8083
 logging.basicConfig(level=logging.INFO)
 
 class GetHandler(http.server.SimpleHTTPRequestHandler):

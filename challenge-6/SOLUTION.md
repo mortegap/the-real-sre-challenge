@@ -13,58 +13,21 @@ $ sudo apt install ansible -y
 ```
 $ sudo vim /etc/ansible/hosts
 ```
-[image](hosts.png)
+![image](hosts.png)
 
 ```
 $ ansible all -m ping -u ubuntu
 ```
-[image](ping.png)
+![image](ping.png)
 
 - Install docker.
   build the image from Dockerfile (challenge-4).
-  Deploy the image on the server.
+  Deploy the image on the server:
 
-main.yml:
-
-- name: "[CHALLENGE 6] Deploy container"
-  hosts: all 
-  tasks:
-
-    - name: Copy challenge-4
-      ansible.builtin.copy:
-        src: ../challenge-4
-        dest: /tmp/
-
-    - name: Add Docker GPG apt Key 
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu bionic stable
-        state: present
-
-    - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
-
-    - name: Install Docker
-      pip:
-        name: docker
-
-    - name: Build Dockerfile
-      docker_image:
-        name: challenge-6:v1.0
-        source: build
-        build:
-          path: /tmp/challenge-4
-
-    - name: Deploy container
-      docker_container:
-        name: challenge-6
-        image: challenge-6:v1.0
-        ports:
-          - '83:8081'
+> Edit main.yml to complete it:
+```
+$ vim main.yml:
+```
 
 I changed the ports because I have other dockers on that ports on same Raspberry.
 
@@ -90,60 +53,8 @@ Everything works!
 $ ansible-playbook main.yml -l myremote -u ubuntu > ansible.log
 ```
 
-I comment the installation steps because I had already docker installed on raspberry.
+I commented the docker installation steps because I had already docker installed on my raspberry.
 
 - Group tasks with tags.
 
-- name: "[CHALLENGE 6] Deploy container"
-  hosts: all 
-  tasks:
-
-    - name: Copy challenge-4
-      ansible.builtin.copy:
-        src: ../challenge-4
-        dest: /tmp/
-      tags:
-        - configure
-
-    - name: Add Docker GPG apt Key 
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-      tags:
-        - install
-
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu bionic stable
-        state: present
-      tags:
-        - intasll
-
-    - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
-      tags:
-        - install
-
-    - name: Install Docker
-      pip:
-        name: docker
-      tags:
-        - install
-
-    - name: Build Dockerfile
-      docker_image:
-        name: challenge-6:v1.0
-        source: build
-        build:
-          path: /tmp/challenge-4
-      tags:
-        - install
-
-    - name: Deploy container
-      docker_container:
-        name: challenge-6
-        image: challenge-6:v1.0
-        ports:
-          - '83:8083'
-      tags:
-        - always
+> Edit main.yml with "tags: foo" depends on the step process and if I want it to be executed allways or not.

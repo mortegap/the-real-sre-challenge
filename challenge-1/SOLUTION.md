@@ -5,24 +5,28 @@
 ```
 cat sample.log | grep -c "500"
 ```
+> Output: 714
 
 2. Count all GET requests from yoko to /rrhh location and was OK (200).
 
 ```
 cat sample.log | grep "yoko" | grep "GET /rrhh" | grep -c "200"
 ```
+> Output: 4
 
 3. How many requests go to /?
 
 ```
 cat sample.log | grep -c "/\""
 ```
+> Output: 717
 
 4. Count all lines without 5XX HTTP code.
 
 ```
 grep -c -v '5[0-9]\{2\}' sample.log
 ```
+> Output: 2191
 
 5. Replace all 503 HTTP code by 500, how many requests have 500 HTTP code?
 

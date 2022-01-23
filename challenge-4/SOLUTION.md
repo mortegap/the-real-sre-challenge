@@ -12,8 +12,8 @@ CMD [ "python", "./server.py" ]
 Commands used for building and running container:
 
 ```
-1- docker build -t challenge-4:latest -t challenge-4:v1 .
-2- docker run -d -p 8080:8080 challenge-4:latest
+$ docker build -t challenge-4:latest -t challenge-4:v1 .
+$ docker run -d -p 8080:8080 challenge-4:latest
 
 ```
 
